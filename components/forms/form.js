@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import styles from './form.module.css'
 import { useFormik } from 'formik';
-import { useRef } from 'react'
+import { Fragment, useRef } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
 // import { object, string, number, date, InferType } from 'yup';
 
 function form() {
@@ -30,7 +32,7 @@ function form() {
         },
         });
         return (
-        <div className={styles.container}>
+        <Fragment>
             <Head>
             <title>Payment form</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,97 +40,104 @@ function form() {
             <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main>
-            <form onSubmit={formik.handleSubmit}>
-                <div className={styles["form-control"]} >
-                    <label htmlFor="customerName">Customer Name</label>
-                    <input
-                    id="customerName"
-                    name="customerName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                    ref={nmInpEl}
-                    required
-                    maxLength={20}
-                    />
-                    {formik.errors.name ? <div>{formik.errors.name}</div> : null}
-                </div>
+            <div className={styles.container}>
+                <section className={styles.logoSection}>
+                    <div className={styles.logo}>
+                        <Link href='/' alt="Logo">
+                            <a> <Image src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
+                        </Link>
+                    </div>
+                </section>
+                <form onSubmit={formik.handleSubmit} className={styles.form}>
+                    <div className={styles["form-control"]} >
+                        <label htmlFor="customerName">Customer Name</label>
+                        <input
+                        id="customerName"
+                        name="customerName"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.name}
+                        ref={nmInpEl}
+                        required
+                        maxLength={20}
+                        />
+                        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
+                    </div>
 
-                <div className={styles["form-control"]} >
-                    <label htmlFor="customerPhone">Customer Phone</label>
-                    <input
-                    id="customerPhone"
-                    name="customerPhone"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.phone}
-                    ref={phInpEl}
-                    required
-                    />
-                    {formik.errors.phone ? <div>{formik.errors.phone}</div> : null}
-                </div>
+                    <div className={styles["form-control"]} >
+                        <label htmlFor="customerPhone">Customer Phone</label>
+                        <input
+                        id="customerPhone"
+                        name="customerPhone"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.phone}
+                        ref={phInpEl}
+                        required
+                        />
+                        {formik.errors.phone ? <div>{formik.errors.phone}</div> : null}
+                    </div>
 
-                <div className={styles["form-control"]} >
-                    <label htmlFor="email">Email</label>
-                    <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                    ref={emInpEl}
-                    required
-                    />
-                    {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-                </div>
+                    <div className={styles["form-control"]} >
+                        <label htmlFor="email">Email</label>
+                        <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        ref={emInpEl}
+                        required
+                        />
+                        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                    </div>
 
-                <div className={styles["form-control"]} >
-                    <label htmlFor="customerAddress">Customer Address</label>
-                    <input
-                    id="customerAddress"
-                    name="customerAddress"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.address}
-                    ref={addrInpEl}
-                    minLength={200}
-                    />
-                    {formik.errors.address ? <div>{formik.errors.address}</div> : null}
-                </div>
+                    <div className={styles["form-control"]} >
+                        <label htmlFor="customerAddress">Customer Address</label>
+                        <input
+                        id="customerAddress"
+                        name="customerAddress"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.address}
+                        ref={addrInpEl}
+                        minLength={200}
+                        />
+                        {formik.errors.address ? <div>{formik.errors.address}</div> : null}
+                    </div>
 
-                <div className={styles["form-control"]} >
-                    <label htmlFor="description">Description</label>
-                    <input
-                    id="description"
-                    name="description"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.remark}
-                    ref={rmrkInpEl}
-                    />
-                    {formik.errors.remark ? <div>{formik.errors.remark}</div> : null}
-                </div>
+                    <div className={styles["form-control"]} >
+                        <label htmlFor="description">Description</label>
+                        <input
+                        id="description"
+                        name="description"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.remark}
+                        ref={rmrkInpEl}
+                        />
+                        {formik.errors.remark ? <div>{formik.errors.remark}</div> : null}
+                    </div>
 
-                <div className={styles["form-control"]} >
-                    <label htmlFor="amount">Amount</label>
-                    <input
-                    id="amount"
-                    name="amount"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.amount}
-                    ref={amtInpEl}
-                    required
-                    min={200}
-                    />
-                    {formik.errors.amount ? <div>{formik.errors.amount}</div> : null}
-                </div>
+                    <div className={styles["form-control"]} >
+                        <label htmlFor="amount">Amount</label>
+                        <input
+                        id="amount"
+                        name="amount"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.amount}
+                        ref={amtInpEl}
+                        required
+                        min={200}
+                        />
+                        {formik.errors.amount ? <div>{formik.errors.amount}</div> : null}
+                    </div>
 
-                <button type="submit">Submit</button>
-            </form>
-            </main>
-        </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </Fragment>
     )
 }
 

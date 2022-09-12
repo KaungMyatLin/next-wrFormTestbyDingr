@@ -1,12 +1,12 @@
-import Navigation from '../components/ui/Navigation'
-import classes from '../styles/globals.css'
+import MainLayoutCmp from '../components/layout/mainlayout_Cmp'
+import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className={classes.app}>
-      <Navigation>
+    <div>
+      <MainLayoutCmp>
         <Component {...pageProps} />
-      </Navigation>
+      </MainLayoutCmp>
     </div>
   )
 }

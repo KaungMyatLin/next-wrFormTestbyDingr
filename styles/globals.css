@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Open Sans', 'Lato', sans-serif;
+  margin: 0;
 }
 
 h1,
@@ -17,26 +18,17 @@ h6 {
   font-family: 'Lato', sans-serif;
 }
 
-body{
-  margin: 0;
+header,
+main,
+section {
+  display: block;
 }
 
-app {
-  width: 90%;
-  max-width: 43rem;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: black;
+a {
+  text-decoration: none;
 }
 
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+button {
+  font: inherit;
+  cursor: pointer;
 }
-
