@@ -42,15 +42,17 @@ function form() {
 
             <div className={styles.container}>
                 <section className={styles.logoSection}>
-                    <div className={styles.logo}>
-                        <Link href='/' alt="Logo">
-                            <a> <Image src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
-                        </Link>
+                    <div className={styles.logoContainer}>
+                        <div className={styles.logo}>
+                            <Link href='/' alt="Logo">
+                                <a> <Image src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
+                            </Link>
+                        </div>
                     </div>
                 </section>
                 <form onSubmit={formik.handleSubmit} className={styles.form}>
                     <div className={styles["form-control"]} >
-                        <label htmlFor="customerName">Customer Name</label>
+                        <label htmlFor="customerName" className={styles.label}>Customer Name</label>
                         <input
                         id="customerName"
                         name="customerName"
@@ -65,7 +67,7 @@ function form() {
                     </div>
 
                     <div className={styles["form-control"]} >
-                        <label htmlFor="customerPhone">Customer Phone</label>
+                        <label htmlFor="customerPhone" className={`${styles.label}`}>Customer Phone</label>
                         <input
                         id="customerPhone"
                         name="customerPhone"
