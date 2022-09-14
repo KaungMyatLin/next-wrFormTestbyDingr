@@ -17,7 +17,7 @@ function form() {
     const amtInpEl = useRef(null);
     const router = useRouter()
 
-    function validate (values) {
+    async function validate (values) {
         const errors = {};
         if (!values.name) {
             errors.name = 'Required';
@@ -38,7 +38,7 @@ function form() {
         }
         return errors;
     };
-        const formik =useFormik({
+        const formik = useFormik({
             initialValues: {
                 name: '',
                 phone: '',
@@ -48,8 +48,10 @@ function form() {
                 amount: ''
             },
             validate,
-            onSubmit: values => {
-                httpUtils(values, nmInpEl, amtInpEl);
+            onSubmit: async values => {
+                const returned = await httpUtils(values, nmInpEl, amtInpEl);
+                const encryptstr_payload =  returned[0]
+                const hashText = returned[1]
                 router.push(`${constants.payApi}, ${encryptstr_payload}, ${hashText}`)
             },
         });
