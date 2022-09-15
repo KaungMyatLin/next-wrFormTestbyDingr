@@ -19,55 +19,55 @@ function form() {
     const router = useRouter()
 
     async function validate () {
-        const schema = Yup.object({
-            name: Yup.string()
-                .max(20, "Must be ${max} characters or less")
-                .required("Required"),
-            phone: Yup.number()
-                .positive().integer()
-                .moreThan(9, "Must be ${more} characters or less")
-                .required("Required"),
-            email: Yup.string()
-                .email("Invalid email addresss`")
-                .required("Required"),
-            amount: Yup.number()
-                .positive("must be positive ")
-                .integer("must be integer")
-                .min(199, "must be more than ${min}")
-                .required("Required"),
-            address: Yup.string(),
-            remark: Yup.string()
-        })
-        schema.validate({ name: 'abcdefghijklmnopqrst', phone: parseInt("095147474"), email: 'abc@g.com', amount: "200"}).catch(function (err) {
-          console.log(err); // => 'ValidationError'
-          console.log(err.errors); // => ['Deve ser maior que 18']
-        });
-        return schema
-        // const errors = {};
-        // if (!values.name) {
-        //     errors.name = 'Required';
-        // } else if (values.name.length > 20) {
-        //     errors.name = 'Must be 20 characters or less';
-        // }
+        // const schema = Yup.object({
+        //     name: Yup.string()
+        //         .max(20, "Must be ${max} characters or less")
+        //         .required("Required"),
+        //     phone: Yup.number()
+        //         .positive().integer()
+        //         .moreThan(9, "Must be ${more} characters or less")
+        //         .required("Required"),
+        //     email: Yup.string()
+        //         .email("Invalid email addresss`")
+        //         .required("Required"),
+        //     amount: Yup.number()
+        //         .positive("must be positive ")
+        //         .integer("must be integer")
+        //         .min(199, "must be more than ${min}")
+        //         .required("Required"),
+        //     address: Yup.string(),
+        //     remark: Yup.string()
+        // })
+        // schema.validate({ name: 'abcdefghijklmnopqrst', phone: parseInt("095147474"), email: 'abc@g.com', amount: "200"}).catch(function (err) {
+        //   console.log(err); // => 'ValidationError'
+        //   console.log(err.errors); // => ['Deve ser maior que 18']
+        // });
+        // return schema
+        const errors = {};
+        if (!values.name) {
+            errors.name = 'Required';
+        } else if (values.name.length > 20) {
+            errors.name = 'Must be 20 characters or less';
+        }
 
-        // if (!values.phone) {
-        //     errors.phone = 'Required';
-        // } else if (values.phone.length > 9) {
-        //     errors.phone = 'Must be 9 characters or less';
-        // }
+        if (!values.phone) {
+            errors.phone = 'Required';
+        } else if (values.phone.length > 9) {
+            errors.phone = 'Must be 9 characters or less';
+        }
 
-        // if (!values.email) {
-        //     errors.email = 'Required';
-        // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        //     errors.email = 'Invalid email address';
-        // }
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
 
-        // if (!values.amount) {
-        //     errors.amount = 'Required';
-        // } else if (parseInt(values.amount) < 200) {
-        //     errors.amount = 'Invalid amount';
-        // }
-        // return errors;
+        if (!values.amount) {
+            errors.amount = 'Required';
+        } else if (parseInt(values.amount) < 200) {
+            errors.amount = 'Invalid amount';
+        }
+        return errors;
     };
         const formik = useFormik({
             initialValues: {
