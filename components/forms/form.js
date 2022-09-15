@@ -52,6 +52,7 @@ function form() {
                 const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
                     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
                     alert(`${encryptstr_payload} and ${hashText}`)
+                    console.log(`${encryptstr_payload} and ${hashText}`)
                 router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
             },
         });
@@ -68,11 +69,9 @@ function form() {
             <div className={styles.container}>
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
-                        <div className={styles.logo}>
-                            <Link href='/' alt="Logo">
-                                <a> <Image src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
-                            </Link>
-                        </div>
+                        <Link href='/' alt="Logo">
+                            <a> <Image src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
+                        </Link>
                     </div>
                 </section>
                 <section className={styles.section}>
@@ -168,7 +167,9 @@ function form() {
                                 {formik.errors.amount ? <div>{formik.errors.amount}</div> : null}
                             </div>
 
-                            <button type="submit">Submit</button>
+                            <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
+                                <button type="submit" className={styles.button} >Submit</button>
+                            </div>
                         </form>
                     </div>
                 </section>

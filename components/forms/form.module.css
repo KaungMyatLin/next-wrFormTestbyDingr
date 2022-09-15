@@ -11,31 +11,43 @@
     margin: 1rem 0 1rem 0;
 }
 .logoContainer {
+    display: flex;
+    justify-content: center;
+    margin: 0;
 }
-.logo {
-    width: 77px;
-    height: 10vh;
-    margin: 0 auto;
-}
-.form {
-    max-width: 43rem;
-    padding: 1rem;
-    border-radius: 12px;
-    background-color: rgb(230, 230, 31);
+div.logoContainer a span{
+    width: 20vw !important;
+    height: 20vw !important;
 }
 .formContainer {
     width: 90%;
     margin: 0 auto;
+}
+.form {
+    padding: 1rem;
+    border-radius: 1%;
+    background-color: rgb(230, 230, 31);
 }
 .form-control {
     margin-bottom: 1rem;
 }
 .labelColumn {
     display: block;
+    font-size: 1rem;
 }
 .inputColumn {
     display: block;
     width: 100%;
+    font-size: 1rem;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+}
+.button {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 4%;
 }
 
 @media (min-width: 768px) {
@@ -45,11 +57,18 @@
     }
     .labelColumn {
         display: inline-block;
-        margin: 0 2rem;
+        margin: 0 1rem;
         width: 12rem;
+        font-size: 1.3rem;
     }
     .inputColumn {
         display: inline-block;
-        width: calc(100% - 16rem - 1rem);
+        width: calc(100% - 14rem - 1rem);
+        font-size: 1.3rem;
+    }
+    .button {
+        width: 7rem;
+        height: 2.5rem;
+        border-radius: 7%;
     }
 }
