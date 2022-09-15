@@ -49,7 +49,9 @@ function form() {
             },
             validate,
             onSubmit: async values => {
-                const [ encryptstr_payload, hashText] = await httpUtils(values, nmInpEl, amtInpEl);
+                const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
+                    , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
+                    alert(`${encryptstr_payload} and ${hashText}`)
                 router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
             },
         });
