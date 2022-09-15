@@ -17,34 +17,32 @@ function form() {
     const amtInpEl = useRef(null);
     const router = useRouter()
 
-    const schemaValidation = () => {
-        console.log("errors");
-        const schema = Yup.object().shape({
-            name: Yup.string()
+    const schemaValidation = Yup.object({
+            name: Yup.string().trim()
                 .max(20, "Your name length must be max ${max} characters or less")
-                .required("Required"),
+                .required("Required"    ),
             phone: Yup.number()
                 .positive("Your phone number must be positive")
                 .integer("Your phone number must be integer")
                 .moreThan(9, "Your phone number must be max ${more} digits or less")
                 .required("Required"),
-            email: Yup.string()
+            email: Yup.string().trim()
                 .email("Your email must be valid email addresss`")
                 .required("Required"),
-            address: Yup.string()
+            address: Yup.string().trim()
                 .min(10, "Your address length must be min ${min} characters or more"),
-            remark: Yup.string(),
+            remark: Yup.string().trim(),
             amount: Yup.number()
                 .positive("Entered total amount must be positive")
                 .integer("Entered total amount must be integer")
                 .min(199, "Entered total amount must be more than ${min} in value")
                 .required("Required"),
-        })
-        schema.validate({ name: 'abcdefghijklmnopqrst', phone: parseInt("123456789"), email: 'abc@g.com', amount: parseInt("200")}).catch(function (err) {
-            console.log(err);
-            console.log(err.errors);
-        });
-    };
+    })
+        // const formObj = await schema.validate({ name: 'abcdefghijklmnopqrst', phone: parseInt("123456789"), email: 'abc@g.com', amount: parseInt("200")}).catch(function (err) {
+        //     console.log(err);
+        //     console.log(err.errors);
+        // });
+        // console.log(formObj)
                                                                                                                     
     return (
         <Fragment>
@@ -64,7 +62,7 @@ function form() {
                         remark: '',
                         amount: ''
                     }}
-                    validation={schemaValidation}
+                    validationSchema={schemaValidation}
                     onSubmit={async () => {
                                 const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
                                     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
