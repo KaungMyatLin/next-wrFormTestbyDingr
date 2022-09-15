@@ -1,3 +1,11 @@
+.day {
+    background: #eee;
+    color: black;
+}
+.night {
+    background: #333;
+    color: white;
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -42,7 +50,8 @@
 }
 .errors {
     color: red;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
 }
 .buttonContainer{
     display: flex;
@@ -63,7 +72,7 @@
 @media (min-width: 768px) {
     .labelColumn {
         display: inline-block;
-        margin: 0 0 0 1rem;
+        margin: 0 1rem 0 0;
         width: 12rem;
         font-size: 1.1rem;
     }
@@ -72,13 +81,12 @@
         width: calc(100% - 14rem - 1rem);
         font-size: 1.1rem;
     }
-    .errors {
-        color: red;
-        font-size: 1.3rem;
-    }
     .button {
         width: 7rem;
         height: 2.5rem;
         border-radius: 7%;
     }
+}
+@media (prefers-color-scheme: dark) {
+    
 }

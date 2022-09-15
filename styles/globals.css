@@ -33,5 +33,6 @@ input {
 }
 
 input:focus-visible {
-  border-style: black;
+  border-style: solid rgb(88, 88, 88);
+
 }

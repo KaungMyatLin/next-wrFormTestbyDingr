@@ -4,6 +4,7 @@ import { Fragment, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useFormik } from 'formik';
+import * as Yup from 'yup'
 import constants from '../../constants/constants'
 import httpUtils from '../../lib/http-util'
 import { useRouter } from 'next/router'
@@ -17,32 +18,56 @@ function form() {
     const amtInpEl = useRef(null);
     const router = useRouter()
 
-    async function validate (values) {
-        const errors = {};
-        if (!values.name) {
-            errors.name = 'Required';
-        } else if (values.name.length > 20) {
-            errors.name = 'Must be 20 characters or less';
-        }
+    async function validate () {
+        const schema = Yup.object({
+            name: Yup.string()
+                .max(20, "Must be ${max} characters or less")
+                .required("Required"),
+            phone: Yup.number()
+                .positive().integer()
+                .moreThan(9, "Must be ${more} characters or less")
+                .required("Required"),
+            email: Yup.string()
+                .email("Invalid email addresss`")
+                .required("Required"),
+            amount: Yup.number()
+                .positive("must be positive ")
+                .integer("must be integer")
+                .min(199, "must be more than ${min}")
+                .required("Required"),
+            address: Yup.string(),
+            remark: Yup.string()
+        })
+        schema.validate({ name: 'abcdefghijklmnopqrst', phone: parseInt("095147474"), email: 'abc@g.com', amount: "200"}).catch(function (err) {
+          console.log(err); // => 'ValidationError'
+          console.log(err.errors); // => ['Deve ser maior que 18']
+        });
+        return schema
+        // const errors = {};
+        // if (!values.name) {
+        //     errors.name = 'Required';
+        // } else if (values.name.length > 20) {
+        //     errors.name = 'Must be 20 characters or less';
+        // }
 
-        if (!values.phone) {
-            errors.phone = 'Required';
-        } else if (values.phone.length > 9) {
-            errors.phone = 'Must be 9 characters or less';
-        }
+        // if (!values.phone) {
+        //     errors.phone = 'Required';
+        // } else if (values.phone.length > 9) {
+        //     errors.phone = 'Must be 9 characters or less';
+        // }
 
-        if (!values.email) {
-            errors.email = 'Required';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-            errors.email = 'Invalid email address';
-        }
+        // if (!values.email) {
+        //     errors.email = 'Required';
+        // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        //     errors.email = 'Invalid email address';
+        // }
 
-        if (!values.amount) {
-            errors.amount = 'Required';
-        } else if (parseInt(values.amount) < 200) {
-            errors.amount = 'Invalid amount';
-        }
-        return errors;
+        // if (!values.amount) {
+        //     errors.amount = 'Required';
+        // } else if (parseInt(values.amount) < 200) {
+        //     errors.amount = 'Invalid amount';
+        // }
+        // return errors;
     };
         const formik = useFormik({
             initialValues: {
@@ -54,7 +79,7 @@ function form() {
                 amount: ''
             },
             validate,
-            onSubmit: async values => {
+            onSubmit: async () => {
                 const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
                     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
                     alert(`${encryptstr_payload} and ${hashText}`)
@@ -72,7 +97,7 @@ function form() {
             <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles.container}>
+            <div className={`${styles.container}`}>
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
                         <Link href='/' alt="Logo">
@@ -84,8 +109,10 @@ function form() {
                     <div className={styles.formContainer}>
                         <form onSubmit={formik.handleSubmit} className={styles.form}>
                             <div className={styles["form-control"]} >
-                                <span className="color: red !important; display: inline; float: none;">*</span>
-                                <label htmlFor="name" className={styles.labelColumn}>Customer Name</label>
+                                <div className={styles.labelColumn}>
+                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <label htmlFor="name">Customer Name</label>
+                                </div>
                                 <input className={styles.inputColumn}
                                 id="name"
                                 name="name"
@@ -93,6 +120,7 @@ function form() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.name}
+                                placeholder="Customer Name"
                                 ref={nmInpEl}
                                 required
                                 maxLength={20}
@@ -101,8 +129,10 @@ function form() {
                             </div>
 
                             <div className={styles["form-control"]} >
-                                <span className="color: red !important; display: inline; float: none;">*</span>
-                                <label htmlFor="phone" className={styles.labelColumn}>Customer Phone</label>
+                                <div className={styles.labelColumn}>
+                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <label htmlFor="phone">Customer Phone</label>
+                                </div>
                                 <input className={styles.inputColumn}
                                 id="phone"
                                 name="phone"
@@ -110,6 +140,7 @@ function form() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.phone}
+                                placeholder="Customer Phone"
                                 ref={phInpEl}
                                 required
                                 />
@@ -117,8 +148,10 @@ function form() {
                             </div>
 
                             <div className={styles["form-control"]} >
-                                <span className="color: red !important; display: inline; float: none;">*</span>
-                                <label htmlFor="email" className={styles.labelColumn}>Email</label>
+                                <div className={styles.labelColumn}>
+                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <label htmlFor="email">Email</label>
+                                </div>
                                 <input className={styles.inputColumn}
                                 id="email"
                                 name="email"
@@ -126,6 +159,7 @@ function form() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.email}
+                                placeholder="Customer Phone"
                                 ref={emInpEl}
                                 required
                                 />
@@ -133,7 +167,9 @@ function form() {
                             </div>
 
                             <div className={styles["form-control"]} >
-                                <label htmlFor="address" className={styles.labelColumn}>Customer Address</label>
+                                <div className={styles.labelColumn}>
+                                    <label htmlFor="address">Customer Address</label>
+                                </div>
                                 <input className={styles.inputColumn}
                                 id="address"
                                 name="address"
@@ -141,6 +177,7 @@ function form() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.address}
+                                placeholder="Customer Address"
                                 ref={addrInpEl}
                                 minLength={10}
                                 />
@@ -148,7 +185,9 @@ function form() {
                             </div>
 
                             <div className={styles["form-control"]} >
-                                <label htmlFor="remark" className={styles.labelColumn}>Description</label>
+                                <div className={styles.labelColumn}>
+                                    <label htmlFor="remark">Description</label>
+                                </div>
                                 <input className={styles.inputColumn}
                                 id="remark"
                                 name="remark"
@@ -156,14 +195,17 @@ function form() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.remark}
+                                placeholder="Description"
                                 ref={rmrkInpEl}
                                 />
                                 {formik.errors.remark ? <div className={styles.errors}>{formik.errors.remark}</div> : null}
                             </div>
 
                             <div className={styles["form-control"]} >
-                                <span className="color: red !important; display: inline; float: none;">*</span>
-                                <label htmlFor="amount" className={styles.labelColumn}>Total Amount</label>
+                                <div className={styles.labelColumn}>
+                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <label htmlFor="amount">Total Amount</label>
+                                </div>
                                 <input className={styles.inputColumn}
                                 id="amount"
                                 name="amount"
@@ -171,6 +213,7 @@ function form() {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.amount}
+                                placeholder="Total Amount"
                                 ref={amtInpEl}
                                 required
                                 />
