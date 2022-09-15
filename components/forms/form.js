@@ -110,7 +110,7 @@ function form() {
                         <form onSubmit={formik.handleSubmit} className={styles.form}>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
-                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="name">Customer Name</label>
                                 </div>
                                 <input className={styles.inputColumn}
@@ -129,7 +129,7 @@ function form() {
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
-                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
                                 <input className={styles.inputColumn}
@@ -147,7 +147,7 @@ function form() {
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
-                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="email">Email</label>
                                 </div>
                                 <input className={styles.inputColumn}
@@ -198,7 +198,7 @@ function form() {
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
-                                    <span className="color: red !important; display: inline; float: none;">*</span>
+                                    <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="amount">Total Amount</label>
                                 </div>
                                 <input className={styles.inputColumn}
