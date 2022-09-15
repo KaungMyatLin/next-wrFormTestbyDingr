@@ -15,7 +15,7 @@
     justify-content: center;
     margin: 0;
 }
-div.logoContainer a span{
+.logoContainer a span{
     width: 20vw !important;
     height: 20vw !important;
 }
@@ -32,13 +32,17 @@ div.logoContainer a span{
     margin-bottom: 1rem;
 }
 .labelColumn {
-    display: block;
+    display: inline-block;
     font-size: 1rem;
 }
 .inputColumn {
     display: block;
     width: 100%;
     font-size: 1rem;
+}
+.errors {
+    color: red;
+    font-size: 1.1rem;
 }
 .buttonContainer{
     display: flex;
@@ -50,20 +54,26 @@ div.logoContainer a span{
     border-radius: 4%;
 }
 
-@media (min-width: 768px) {
-    .logo {
-        width: 154px;
-        height: 10vh;
+@media (min-width: 426px) {
+    .logoContainer a span{
+        width: 85px !important;
+        height: 85px !important;
     }
+}
+@media (min-width: 768px) {
     .labelColumn {
         display: inline-block;
-        margin: 0 1rem;
+        margin: 0 0 0 1rem;
         width: 12rem;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     .inputColumn {
         display: inline-block;
         width: calc(100% - 14rem - 1rem);
+        font-size: 1.1rem;
+    }
+    .errors {
+        color: red;
         font-size: 1.3rem;
     }
     .button {

@@ -26,3 +26,12 @@ button {
   font: inherit;
   cursor: pointer;
 }
+
+input {
+  border-radius: 1%;
+  border-style: none;
+}
+
+input:focus-visible {
+  border-style: black;
+}

@@ -25,6 +25,12 @@ function form() {
             errors.name = 'Must be 20 characters or less';
         }
 
+        if (!values.phone) {
+            errors.phone = 'Required';
+        } else if (values.phone.length > 9) {
+            errors.phone = 'Must be 9 characters or less';
+        }
+
         if (!values.email) {
             errors.email = 'Required';
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -78,6 +84,7 @@ function form() {
                     <div className={styles.formContainer}>
                         <form onSubmit={formik.handleSubmit} className={styles.form}>
                             <div className={styles["form-control"]} >
+                                <span className="color: red !important; display: inline; float: none;">*</span>
                                 <label htmlFor="name" className={styles.labelColumn}>Customer Name</label>
                                 <input className={styles.inputColumn}
                                 id="name"
@@ -90,10 +97,11 @@ function form() {
                                 required
                                 maxLength={20}
                                 />
-                                {formik.errors.name ? <div>{formik.errors.name}</div> : null}
+                                {formik.errors.name ? <div className={styles.errors}>{formik.errors.name}</div> : null}
                             </div>
 
                             <div className={styles["form-control"]} >
+                                <span className="color: red !important; display: inline; float: none;">*</span>
                                 <label htmlFor="phone" className={styles.labelColumn}>Customer Phone</label>
                                 <input className={styles.inputColumn}
                                 id="phone"
@@ -105,10 +113,11 @@ function form() {
                                 ref={phInpEl}
                                 required
                                 />
-                                {formik.errors.phone ? <div>{formik.errors.phone}</div> : null}
+                                {formik.errors.phone ? <div className={styles.errors}>{formik.errors.phone}</div> : null}
                             </div>
 
                             <div className={styles["form-control"]} >
+                                <span className="color: red !important; display: inline; float: none;">*</span>
                                 <label htmlFor="email" className={styles.labelColumn}>Email</label>
                                 <input className={styles.inputColumn}
                                 id="email"
@@ -120,7 +129,7 @@ function form() {
                                 ref={emInpEl}
                                 required
                                 />
-                                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                                {formik.errors.email ? <div className={styles.errors}>{formik.errors.email}</div> : null}
                             </div>
 
                             <div className={styles["form-control"]} >
@@ -135,7 +144,7 @@ function form() {
                                 ref={addrInpEl}
                                 minLength={10}
                                 />
-                                {formik.errors.address ? <div>{formik.errors.address}</div> : null}
+                                {formik.errors.address ? <div className={styles.errors}>{formik.errors.address}</div> : null}
                             </div>
 
                             <div className={styles["form-control"]} >
@@ -149,10 +158,11 @@ function form() {
                                 value={formik.values.remark}
                                 ref={rmrkInpEl}
                                 />
-                                {formik.errors.remark ? <div>{formik.errors.remark}</div> : null}
+                                {formik.errors.remark ? <div className={styles.errors}>{formik.errors.remark}</div> : null}
                             </div>
 
                             <div className={styles["form-control"]} >
+                                <span className="color: red !important; display: inline; float: none;">*</span>
                                 <label htmlFor="amount" className={styles.labelColumn}>Total Amount</label>
                                 <input className={styles.inputColumn}
                                 id="amount"
@@ -164,7 +174,7 @@ function form() {
                                 ref={amtInpEl}
                                 required
                                 />
-                                {formik.errors.amount ? <div>{formik.errors.amount}</div> : null}
+                                {formik.errors.amount ? <div className={styles.errors}>{formik.errors.amount}</div> : null}
                             </div>
 
                             <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
