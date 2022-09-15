@@ -48,8 +48,11 @@
     width: 100%;
     font-size: 1rem;
 }
+.inptouched {
+    border-color: #e63946;
+}
 .errors {
-    color: red;
+    color: #e63946;
     font-size: 1rem;
     font-weight: 600;
 }

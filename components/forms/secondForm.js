@@ -3,7 +3,7 @@ import styles from './form.module.css'
 import { Fragment, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Formik, useFormik } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup'
 import httpUtils from '../../lib/http-util'
 import { useRouter } from 'next/router'
@@ -40,37 +40,10 @@ function form() {
                 .min(199, "Entered total amount must be more than ${min} in value")
                 .required("Required"),
         })
-        schema.validate({ name: '12345678901234567890', phone: parseInt("123456789"), email: 'abc@g.com', amount: parseInt("200")}).catch(function (err) {
+        schema.validate({ name: 'abcdefghijklmnopqrst', phone: parseInt("123456789"), email: 'abc@g.com', amount: parseInt("200")}).catch(function (err) {
             console.log(err);
             console.log(err.errors);
         });
-        // return schema
-        // const errors = {};
-        // console.log("errors");
-        // if (!values.name) {
-        //     errors.name = 'Required';
-        // } else if (values.name.length > 20) {
-        //     errors.name = 'Must be 20 characters or less';
-        // }
-
-        // if (!values.phone) {
-        //     errors.phone = 'Required';
-        // } else if (values.phone.length > 9) {
-        //     errors.phone = 'Must be 9 characters or less';
-        // }
-
-        // if (!values.email) {
-        //     errors.email = 'Required';
-        // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        //     errors.email = 'Invalid email address';
-        // }
-
-        // if (!values.amount) {
-        //     errors.amount = 'Required';
-        // } else if (parseInt(values.amount) < 200) {
-        //     errors.amount = 'Invalid amount';
-        // }
-        // return errors;
     };
                                                                                                                     
     return (
@@ -100,7 +73,10 @@ function form() {
                                 router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
                             }}
             >
-            {({errors, touched}) => (<div className={`${styles.container}`}>
+            {(formik) => {
+            const { errors, touched, isValid, dirty } = formik;
+            return (
+            <div className={`${styles.container}`}>
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
                         <Link href='/' alt="Logo">
@@ -116,7 +92,7 @@ function form() {
                                     <span className="color: red !important; display: inline; float: none;">*</span>
                                     <label htmlFor="name">Customer Name</label>
                                 </div>
-                                <input className={styles.inputColumn}
+                                <input className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
                                 id="name"
                                 name="name"
                                 type="text"
@@ -125,18 +101,15 @@ function form() {
                                 value={formik.values.name}
                                 placeholder="Customer Name"
                                 ref={nmInpEl}
-                                required
-                                maxLength={20}
                                 />
-                                {errors.name ? <div className={styles.errors}>{errors.name}</div> : null}
+                                {errors.name && touched.name ? <div className={styles.errors}>{errors.name}</div> : null}
                             </div>
-
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span className="color: red !important; display: inline; float: none;">*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
-                                <input className={styles.inputColumn}
+                                <input className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
                                 id="phone"
                                 name="phone"
                                 type="text"
@@ -145,17 +118,15 @@ function form() {
                                 value={formik.values.phone}
                                 placeholder="Customer Phone"
                                 ref={phInpEl}
-                                required
                                 />
-                                {errors.phone ? <div className={styles.errors}>{errors.phone}</div> : null}
+                                {errors.phone && touched.phone ? <div className={styles.errors}>{errors.phone}</div> : null}
                             </div>
-
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span className="color: red !important; display: inline; float: none;">*</span>
                                     <label htmlFor="email">Email</label>
                                 </div>
-                                <input className={styles.inputColumn}
+                                <input className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
                                 id="email"
                                 name="email"
                                 type="email"
@@ -164,16 +135,14 @@ function form() {
                                 value={formik.values.email}
                                 placeholder="Email"
                                 ref={emInpEl}
-                                required
                                 />
-                                {errors.email ? <div className={styles.errors}>{errors.email}</div> : null}
+                                {errors.email && touched.email ? <div className={styles.errors}>{errors.email}</div> : null}
                             </div>
-
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="address">Customer Address</label>
                                 </div>
-                                <input className={styles.inputColumn}
+                                <input className={`${styles.inputColumn} ${errors.address && touched.address? styles.inptouched: null}`}
                                 id="address"
                                 name="address"
                                 type="text"
@@ -182,16 +151,14 @@ function form() {
                                 value={formik.values.address}
                                 placeholder="Customer Address"
                                 ref={addrInpEl}
-                                minLength={10}
                                 />
-                                {errors.address ? <div className={styles.errors}>{errors.address}</div> : null}
+                                {errors.address && touched.address? <div className={styles.errors}>{errors.address}</div> : null}
                             </div>
-
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="remark">Description</label>
                                 </div>
-                                <input className={styles.inputColumn}
+                                <input className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
                                 id="remark"
                                 name="remark"
                                 type="text"
@@ -201,15 +168,14 @@ function form() {
                                 placeholder="Description"
                                 ref={rmrkInpEl}
                                 />
-                                {errors.remark ? <div className={styles.errors}>{errors.remark}</div> : null}
+                                {errors.remark && touched.remark? <div className={styles.errors}>{errors.remark}</div> : null}
                             </div>
-
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span className="color: red !important; display: inline; float: none;">*</span>
                                     <label htmlFor="amount">Total Amount</label>
                                 </div>
-                                <input className={styles.inputColumn}
+                                <input className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
                                 id="amount"
                                 name="amount"
                                 type="number"
@@ -218,18 +184,18 @@ function form() {
                                 value={formik.values.amount}
                                 placeholder="Total Amount"
                                 ref={amtInpEl}
-                                required
                                 />
-                                {errors.amount ? <div className={styles.errors}>{errors.amount}</div> : null}
+                                {errors.amount && touched.amount? <div className={styles.errors}>{errors.amount}</div> : null}
                             </div>
-
                             <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
-                                <button type="submit" className={styles.button} >Submit</button>
+                                <button type="submit" className={`${styles.button}`} 
+                                    disabled={!(dirty && isValid)}
+                                >Submit</button>
                             </div>
                         </form>
                     </div>
                 </section>
-            </div>)}
+            </div>)}}
             </Formik>
         </Fragment>
     )
