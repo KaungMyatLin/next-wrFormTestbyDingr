@@ -90,7 +90,7 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="name">Customer Name</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.name && dirty && touched.name? styles.inptouched: null}`}
+                                <input className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
                                 id="name"
                                 name="name"
                                 type="text"
@@ -107,7 +107,7 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.phone && dirty && touched.phone? styles.inptouched: null}`}
+                                <input className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
                                 id="phone"
                                 name="phone"
                                 type="text"
@@ -124,7 +124,7 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="email">Email</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.email && dirty && touched.email? styles.inptouched: null}`}
+                                <input className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
                                 id="email"
                                 name="email"
                                 type="email"
@@ -156,7 +156,7 @@ function form() {
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="remark">Description</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.remark && dirty && touched.remark? styles.inptouched: null}`}
+                                <input className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
                                 id="remark"
                                 name="remark"
                                 type="text"
@@ -173,7 +173,7 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="amount">Total Amount</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.amount && dirty && touched.amount? styles.inptouched: null}`}
+                                <input className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
                                 id="amount"
                                 name="amount"
                                 type="number"

@@ -49,7 +49,8 @@
     font-size: 1rem;
 }
 .inptouched {
-    border-color: #e63946;
+    border-width: 2px;
+    border-color: #e63946 !important;
     background-color: #faacac;
 }
 .errors {
