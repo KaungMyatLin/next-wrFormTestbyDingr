@@ -50,6 +50,7 @@
 }
 .inptouched {
     border-color: #e63946;
+    background-color: #faacac;
 }
 .errors {
     color: #e63946;
