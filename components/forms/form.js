@@ -20,11 +20,11 @@ function form() {
     const schemaValidation = Yup.object({
             name: Yup.string().trim()
                 .max(20, "Your name length must be max ${max} characters or less")
-                .required("Required"    ),
+                .required("Required"),
             phone: Yup.number()
+                .truncate()
                 .positive("Your phone number must be positive")
                 .integer("Your phone number must be integer")
-                .moreThan(9, "Your phone number must be max ${more} digits or less")
                 .required("Required"),
             email: Yup.string().trim()
                 .email("Your email must be valid email addresss`")
@@ -63,11 +63,12 @@ function form() {
                         amount: ''
                     }}
                     validationSchema={schemaValidation}
-                    onSubmit={async () => {
+                    onSubmit={async (values) => {
+                                console.dir("onSubmit callback values: "+values)
                                 const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
                                     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
-                                    alert(`${encryptstr_payload} and ${hashText}`)
-                                    console.log(`${encryptstr_payload} and ${hashText}`)
+                                alert(`${encryptstr_payload} and ${hashText}`)
+                                console.log(`${encryptstr_payload} and ${hashText}`)    
                                 router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
                             }}
             >
@@ -75,6 +76,7 @@ function form() {
             const { errors, touched, isValid, dirty } = formik;
             return (
             <div className={`${styles.container}`}>
+            {console.dir("inside formik component: "+formik)}
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
                         <Link href='/' alt="Logo">
@@ -94,9 +96,10 @@ function form() {
                                 id="name"
                                 name="name"
                                 type="text"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.name}
+                                // onChange={formik.handleChange}
+                                // onBlur={formik.handleBlur}
+                                // value={formik.values.name}
+                                { ... formik.getFieldProps('name')}
                                 placeholder="Customer Name"
                                 ref={nmInpEl}
                                 />
@@ -110,10 +113,8 @@ function form() {
                                 <input className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
                                 id="phone"
                                 name="phone"
-                                type="text"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.phone}
+                                type="number"
+                                { ... formik.getFieldProps('phone')}
                                 placeholder="Customer Phone"
                                 ref={phInpEl}
                                 />
@@ -128,9 +129,7 @@ function form() {
                                 id="email"
                                 name="email"
                                 type="email"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.email}
+                                { ... formik.getFieldProps('email')}
                                 placeholder="Email"
                                 ref={emInpEl}
                                 />
@@ -144,11 +143,10 @@ function form() {
                                 id="address"
                                 name="address"
                                 type="text"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.address}
+                                { ... formik.getFieldProps('address')}
                                 placeholder="Customer Address"
                                 ref={addrInpEl}
+                                maxLength={10}
                                 />
                                 {errors.address && touched.address? <div className={styles.errors}>{errors.address}</div> : null}
                             </div>
@@ -160,9 +158,7 @@ function form() {
                                 id="remark"
                                 name="remark"
                                 type="text"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.remark}
+                                { ... formik.getFieldProps('remark')}
                                 placeholder="Description"
                                 ref={rmrkInpEl}
                                 />
@@ -177,9 +173,7 @@ function form() {
                                 id="amount"
                                 name="amount"
                                 type="number"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.amount}
+                                { ... formik.getFieldProps('amount')}
                                 placeholder="Total Amount"
                                 ref={amtInpEl}
                                 />
