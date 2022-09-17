@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Montserrat:wght@400;600;700&display=swap');
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Open Sans', 'Lato', sans-serif;
+  font-family: Montserrat, sans-serif;
   margin: 0;
+  font-weight: 700;
 }
 
 h1,
@@ -15,7 +15,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'unknown', sans-serif;
 }
 
 a {
@@ -31,7 +31,9 @@ input {
   border-radius: 1%;
   border: 1px solid #ccc;
   padding: 5px 5px 3px 5px;
-  font: inherit;
+  font-family: Montserrat, sans-serif;
+  margin: 0;
+  font-weight: 400;
 }
 
 input:focus {

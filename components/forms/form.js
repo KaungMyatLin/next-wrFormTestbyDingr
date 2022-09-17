@@ -76,7 +76,8 @@ function form() {
             const { errors, touched, isValid, dirty } = formik;
             return (
             <div className={`${styles.container}`}>
-            {console.dir("inside formik component: "+formik)}
+            {console.dir("inside formik component: ")}
+            {console.dir(formik)}
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
                         <Link href='/' alt="Logo">
