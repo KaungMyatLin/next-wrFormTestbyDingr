@@ -5,17 +5,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Formik } from 'formik';
 import * as Yup from 'yup'
-import httpUtils from '../../lib/http-util'
+import httpUtils from '@lib/http-util'
 import { useRouter } from 'next/router'
 
 function form() {
-    const nmInpEl = useRef(null);
-    const phInpEl = useRef(null);
-    const emInpEl = useRef(null);
+    const nmInpEl   = useRef(null);
+    const phInpEl   = useRef(null);
+    const emInpEl   = useRef(null);
     const addrInpEl = useRef(null);
     const rmrkInpEl = useRef(null);
-    const amtInpEl = useRef(null);
-    const router = useRouter()
+    const amtInpEl  = useRef(null);
+    const router    = useRouter()
 
     const schemaValidation = Yup.object({
             name: Yup.string().trim()
@@ -80,8 +80,8 @@ function form() {
             {console.dir(formik)}
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
-                        <Link href='/' alt="Logo">
-                            <a> <Image src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
+                        <Link href='/'  alt="Logo">
+                            <a> <Image  src="/images/site/dinger_logo.svg" width={400} height={300}/> </a>
                         </Link>
                     </div>
                 </section>
@@ -127,12 +127,12 @@ function form() {
                                     <label htmlFor="email">Email</label>
                                 </div>
                                 <input className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
-                                id="email"
-                                name="email"
-                                type="email"
+                                id   = "email"
+                                name = "email"
+                                type = "email"
                                 { ... formik.getFieldProps('email')}
-                                placeholder="Email"
-                                ref={emInpEl}
+                                placeholder = "Email"
+                                ref         = {emInpEl}
                                 />
                                 {errors.email && touched.email ? <div className={styles.errors}>{errors.email}</div> : null}
                             </div>
