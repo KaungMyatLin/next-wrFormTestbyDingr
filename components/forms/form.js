@@ -3,7 +3,7 @@ import styles from './form.module.css'
 import { Fragment, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Formik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 import httpUtils from '@lib/http-util'
 import { useRouter } from 'next/router'
@@ -87,105 +87,101 @@ function form() {
                 </section>
                 <section className={styles.section}>
                     <div className={styles.formContainer}>
-                        <form onSubmit={formik.handleSubmit} className={styles.form}>
+                        <Form className={styles.form}>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="name">Customer Name</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
-                                id="name"
-                                name="name"
-                                type="text"
-                                // onChange={formik.handleChange}
-                                // onBlur={formik.handleBlur}
-                                // value={formik.values.name}
-                                { ... formik.getFieldProps('name')}
-                                placeholder="Customer Name"
-                                ref={nmInpEl}
+                                <Field className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    // onChange={formik.handleChange}
+                                    // onBlur={formik.handleBlur}
+                                    // value={formik.values.name}
+                                    // above or below
+                                    // { ... formik.getFieldProps('name')}
+                                    placeholder="Customer Name"
+                                    ref={nmInpEl}
                                 />
-                                {errors.name && touched.name ? <div className={styles.errors}>{errors.name}</div> : null}
+                                {/* {errors.name && touched.name ? <div className={styles.errors}>{errors.name}</div> : null} */}
+                                <ErrorMessage name='name' className={styles.errors} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
-                                id="phone"
-                                name="phone"
-                                type="number"
-                                { ... formik.getFieldProps('phone')}
-                                placeholder="Customer Phone"
-                                ref={phInpEl}
+                                <Field className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
+                                    id="phone"
+                                    name="phone"
+                                    type="number"
+                                    placeholder="Customer Phone"
+                                    ref={phInpEl}
                                 />
-                                {errors.phone && touched.phone ? <div className={styles.errors}>{errors.phone}</div> : null}
+                                <ErrorMessage name='phone' className={styles.errors} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="email">Email</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
-                                id   = "email"
-                                name = "email"
-                                type = "email"
-                                { ... formik.getFieldProps('email')}
-                                placeholder = "Email"
-                                ref         = {emInpEl}
+                                <Field className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
+                                    id ="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Email"
+                                    ref={emInpEl}
                                 />
-                                {errors.email && touched.email ? <div className={styles.errors}>{errors.email}</div> : null}
+                                <ErrorMessage name='email' className={styles.errors} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="address">Customer Address</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.address && touched.address? styles.inptouched: null}`}
-                                id="address"
-                                name="address"
-                                type="text"
-                                { ... formik.getFieldProps('address')}
-                                placeholder="Customer Address"
-                                ref={addrInpEl}
-                                maxLength={10}
+                                <Field className={`${styles.inputColumn} ${errors.address && touched.address? styles.inptouched: null}`}
+                                    id="address"
+                                    name="address"
+                                    type="text"
+                                    placeholder="Customer Address"
+                                    ref={addrInpEl}
+                                    maxLength={10}
                                 />
-                                {errors.address && touched.address? <div className={styles.errors}>{errors.address}</div> : null}
+                                <ErrorMessage name='address' className={styles.errors} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="remark">Description</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
-                                id="remark"
-                                name="remark"
-                                type="text"
-                                { ... formik.getFieldProps('remark')}
-                                placeholder="Description"
-                                ref={rmrkInpEl}
+                                <Field className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
+                                    id="remark"
+                                    name="remark"
+                                    type="text"
+                                    placeholder="Description"
+                                    ref={rmrkInpEl}
                                 />
-                                {errors.remark && touched.remark? <div className={styles.errors}>{errors.remark}</div> : null}
+                                <ErrorMessage name='remark' className={styles.errors} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="amount">Total Amount</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
-                                id="amount"
-                                name="amount"
-                                type="number"
-                                { ... formik.getFieldProps('amount')}
-                                placeholder="Total Amount"
-                                ref={amtInpEl}
+                                <Field className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
+                                    id="amount"
+                                    name="amount"
+                                    type="number"
+                                    placeholder="Total Amount"
+                                    ref={amtInpEl}
                                 />
-                                {errors.amount && touched.amount? <div className={styles.errors}>{errors.amount}</div> : null}
+                                <ErrorMessage name='amount' className={styles.errors} />
                             </div>
                             <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
-                                <button type="submit" className={`${styles.button}`} 
-                                    disabled={!(dirty && isValid)}
-                                >Submit</button>
+                                <button type="submit" className={`${styles.button}`}
+                                    disabled={!(dirty && isValid)} >Submit</button>
                             </div>
-                        </form>
+                        </Form>
                     </div>
                 </section>
             </div>)}}
