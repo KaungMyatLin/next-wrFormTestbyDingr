@@ -7,6 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 import httpUtils from '@lib/http-util'
 import { useRouter } from 'next/router'
+import simpledivErrMsg from '@components/error/simpledivErrMsg'
 
 function form() {
     const nmInpEl   = useRef(null);
@@ -76,8 +77,8 @@ function form() {
             const { errors, touched, isValid, dirty } = formik;
             return (
             <div className={`${styles.container}`}>
-            {console.dir("inside formik component: ")}
-            {console.dir(formik)}
+            {/* {console.dir("inside formik component: ")}
+            {console.dir(formik)} */}
                 <section className={styles.section}>
                     <div className={styles.logoContainer}>
                         <Link href='/'  alt="Logo">
@@ -106,7 +107,8 @@ function form() {
                                     ref={nmInpEl}
                                 />
                                 {/* {errors.name && touched.name ? <div className={styles.errors}>{errors.name}</div> : null} */}
-                                <ErrorMessage name='name' className={styles.errors} />
+                                {/* <ErrorMessage name='name' className={styles.errors} component="div" /> */}
+                                <ErrorMessage name='name' component={simpledivErrMsg} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
@@ -120,7 +122,7 @@ function form() {
                                     placeholder="Customer Phone"
                                     ref={phInpEl}
                                 />
-                                <ErrorMessage name='phone' className={styles.errors} />
+                                <ErrorMessage name='phone' component={simpledivErrMsg} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
@@ -134,7 +136,9 @@ function form() {
                                     placeholder="Email"
                                     ref={emInpEl}
                                 />
-                                <ErrorMessage name='email' className={styles.errors} />
+                                <ErrorMessage name='email'>
+                                    {errMsg => <div className={styles.errors}>{errMsg}</div>}
+                                </ErrorMessage>
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
@@ -148,7 +152,7 @@ function form() {
                                     ref={addrInpEl}
                                     maxLength={10}
                                 />
-                                <ErrorMessage name='address' className={styles.errors} />
+                                <ErrorMessage name='address' component={simpledivErrMsg} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
@@ -175,7 +179,7 @@ function form() {
                                     placeholder="Total Amount"
                                     ref={amtInpEl}
                                 />
-                                <ErrorMessage name='amount' className={styles.errors} />
+                                <ErrorMessage name='amount' component={simpledivErrMsg} />
                             </div>
                             <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
                                 <button type="submit" className={`${styles.button}`}
