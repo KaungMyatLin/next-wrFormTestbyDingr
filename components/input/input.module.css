@@ -8,6 +8,10 @@
     border-color: #e63946 !important;
     background-color: #faacac;
 }
+.custominputColumn {
+    display:block; 
+    width:100%;
+}
 @media (min-width: 768px) {
     .inputColumn {
         display: inline-block;

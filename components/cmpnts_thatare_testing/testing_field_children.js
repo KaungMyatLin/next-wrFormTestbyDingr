@@ -66,7 +66,7 @@ function field_children() {
                                 // const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
                                 //     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
                                 // alert(`${encryptstr_payload} and ${hashText}`)
-                                // console.log(`${encryptstr_payload} and ${hashText}`)    
+                                // console.log(`${encryptstr_payload} and ${hashText}`)
                                 // router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
                             }}
             >
@@ -93,11 +93,12 @@ function field_children() {
                                 </div>
                                 <Field name="name" >
                                     { props => {
+                                        // console.log(props)
                                         const {field, form, meta} = props
                                         return (
-                                            <div>
+                                            <div className={`${styles.inputColumn}`}>
                                                 <CustomInput id="name" type="text" placeholder="Customer Name" ref={nmInpEl} {...field} meta={meta}/>
-                                                {meta.error && meta.touched ? <div className={styles.errors}>{errors.name}</div> : null}
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{meta.error}</div> : null}
                                             </div>
                                         )
                                     }}
@@ -108,13 +109,13 @@ function field_children() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
-                                <Field name="name" >
+                                <Field name="phone" >
                                     { props => {
                                         const {field, form, meta} = props
                                         return (
-                                            <div>
-                                                <CustomInput id="name" type="text" placeholder="Customer Name" ref={nmInpEl} {...field} meta={meta}/>
-                                                {meta.error && meta.touched ? <div className={styles.errors}>{errors.name}</div> : null}
+                                            <div className={`${styles.inputColumn}`}>
+                                                <CustomInput id="phone" type="text" placeholder="Customer Phone" ref={phInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{meta.error}</div> : null}
                                             </div>
                                         )
                                     }}
@@ -125,57 +126,66 @@ function field_children() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="email">Email</label>
                                 </div>
-                                <Field className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
-                                    id ="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="Email"
-                                    ref={emInpEl}
-                                />
-                                <ErrorMessage name='email'>
-                                    {errMsg => <div className={styles.errors}>{errMsg}</div>}
-                                </ErrorMessage>
+                                <Field name="email" >
+                                    { props => {
+                                        const {field, form, meta} = props
+                                        return (
+                                            <div className={`${styles.inputColumn}`}>
+                                                <CustomInput id="email" type="text" placeholder="Email" ref={emInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{meta.error}</div> : null}
+                                            </div>
+                                        )
+                                    }}
+                                </Field>
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="address">Customer Address</label>
                                 </div>
-                                <Field className={`${styles.inputColumn} ${errors.address && touched.address? styles.inptouched: null}`}
-                                    id="address"
-                                    name="address"
-                                    type="text"
-                                    placeholder="Customer Address"
-                                    ref={addrInpEl}
-                                    maxLength={10}
-                                />
-                                <ErrorMessage name='address' component={SimpledivErrMsg} />
+                                <Field name="address" >
+                                    { props => {
+                                        const {field, form, meta} = props
+                                        return (
+                                            <div className={`${styles.inputColumn}`}>
+                                                <CustomInput id="address" type="text" placeholder="Address" ref={addrInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{meta.error}</div> : null}
+                                            </div>
+                                        )
+                                    }}
+                                </Field>
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="remark">Description</label>
                                 </div>
-                                <Field className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
-                                    id="remark"
-                                    name="remark"
-                                    type="text"
-                                    placeholder="Description"
-                                    ref={rmrkInpEl}
-                                />
-                                <ErrorMessage name='remark' className={styles.errors} />
+                                <Field name="remark" >
+                                    { props => {
+                                        const {field, form, meta} = props
+                                        return (
+                                            <div className={`${styles.inputColumn}`}>
+                                                <CustomInput id="remark" type="text" placeholder="Remark" ref={rmrkInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{meta.error}</div> : null}
+                                            </div>
+                                        )
+                                    }}
+                                </Field>
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="amount">Total Amount</label>
                                 </div>
-                                <Field className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
-                                    id="amount"
-                                    name="amount"
-                                    type="number"
-                                    placeholder="Total Amount"
-                                    ref={amtInpEl}
-                                />
-                                <ErrorMessage name='amount' component={SimpledivErrMsg} />
+                                <Field name="amount" >
+                                    { props => {
+                                        const {field, form, meta} = props
+                                        return (
+                                            <div className={`${styles.inputColumn}`}>
+                                                <CustomInput id="amount" type="text" placeholder="Amount" ref={amtInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{meta.error}</div> : null}
+                                            </div>
+                                        )
+                                    }}
+                                </Field>
                             </div>
                             <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
                                 <button type="submit" className={`${styles.button}`}

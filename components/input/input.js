@@ -11,14 +11,15 @@ const Input = React.forwardRef((props, ref) => {
             focus: activate
         }
     })
-    const {id, name, onBlur, onChange, placeholder, type, meta } = props;
-    console.log(props)
+    const {id, name, onBlur, onChange, placeholder, type, meta, value } = props;
+    // console.log(props)
+    console.log(props.children)  
     return (
         <input ref={inputRef} 
             id={id}             name={name}     type={type} 
-            onBlur={onBlur}     onChange={onChange} 
+            onBlur={onBlur}     onChange={onChange}     value={value}
             placeholder={placeholder} 
-            className={`${styles.inputColumn} ${meta.error && meta.touched? styles.inptouched: null}`}>
+            className={`${meta.error && meta.touched? styles.inptouched: null} ${styles.custominputColumn}`}>
             {props.children}
         </input>
     )
