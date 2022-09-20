@@ -23,8 +23,6 @@ function form() {
                 .max(20, "Your name length must be max ${max} characters or less")
                 .required("Required"),
             phone: Yup.number()
-                .truncate()
-                .positive("Your phone number must be positive")
                 .integer("Your phone number must be integer")
                 .required("Required"),
             email: Yup.string().trim()
@@ -34,7 +32,6 @@ function form() {
                 .min(10, "Your address length must be min ${min} characters or more"),
             remark: Yup.string().trim(),
             amount: Yup.number()
-                .positive("Entered total amount must be positive")
                 .integer("Entered total amount must be integer")
                 .min(199, "Entered total amount must be more than ${min} in value")
                 .required("Required"),
@@ -65,11 +62,12 @@ function form() {
                     }}
                     validationSchema={schemaValidation}
                     onSubmit={async (values) => {
-                                console.dir("onSubmit callback values: "+values)
+                                console.dir("onSubmit callback values: ")
+                                console.dir(values)
                                 const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
                                     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
                                 alert(`${encryptstr_payload} and ${hashText}`)
-                                console.log(`${encryptstr_payload} and ${hashText}`)    
+                                console.log(`${encryptstr_payload} and ${hashText}`)
                                 router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
                             }}
             >

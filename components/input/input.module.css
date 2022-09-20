@@ -1,0 +1,17 @@
+.inputColumn {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+}
+.inptouched {
+    border-width: 2px;
+    border-color: #e63946 !important;
+    background-color: #faacac;
+}
+@media (min-width: 768px) {
+    .inputColumn {
+        display: inline-block;
+        width: calc(100% - 14rem - 1rem);
+        font-size: 1.1rem;
+    }
+}

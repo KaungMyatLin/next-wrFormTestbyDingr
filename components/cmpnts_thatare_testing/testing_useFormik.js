@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from './form.module.css'
+import styles from '../forms/form.module.css'
 import { Fragment, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'

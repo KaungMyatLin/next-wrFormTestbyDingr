@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import styles from './form.module.css'
+import styles from '../forms/form.module.css'
 import { Fragment, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,9 +7,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
 import httpUtils from '@lib/http-util'
 import { useRouter } from 'next/router'
-import simpledivErrMsg from '@components/error/simpledivErrMsg'
-
-function form() {
+import SimpledivErrMsg from '@components/error/simpledivErrMsg'
+import CustomInput from '@components/input/input'
+function field_children() {
     const nmInpEl   = useRef(null);
     const phInpEl   = useRef(null);
     const emInpEl   = useRef(null);
@@ -66,11 +66,11 @@ function form() {
                     validationSchema={schemaValidation}
                     onSubmit={async (values) => {
                                 console.dir("onSubmit callback values: "+values)
-                                const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
-                                    , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
-                                alert(`${encryptstr_payload} and ${hashText}`)
-                                console.log(`${encryptstr_payload} and ${hashText}`)    
-                                router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
+                                // const [ encryptstr_payload, hashText] = await httpUtils(nmInpEl.current.value, amtInpEl.current.value
+                                //     , emInpEl.current.value, rmrkInpEl.current.value, phInpEl.current.value, addrInpEl.current.value);
+                                // alert(`${encryptstr_payload} and ${hashText}`)
+                                // console.log(`${encryptstr_payload} and ${hashText}`)    
+                                // router.push(`https://form.dinger.asia?payload=${encryptstr_payload}&hashValue=${hashText}`)
                             }}
             >
             {(formik) => {
@@ -94,35 +94,34 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="name">Customer Name</label>
                                 </div>
-                                <Field className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    // onChange={formik.handleChange}
-                                    // onBlur={formik.handleBlur}
-                                    // value={formik.values.name}
-                                    // above or below
-                                    // { ... formik.getFieldProps('name')}
-                                    placeholder="Customer Name"
-                                    ref={nmInpEl}
-                                />
-                                {/* {errors.name && touched.name ? <div className={styles.errors}>{errors.name}</div> : null} */}
-                                {/* <ErrorMessage name='name' className={styles.errors} component="div" /> */}
-                                <ErrorMessage name='name' component={simpledivErrMsg} />
+                                <Field name="name" >
+                                    { props => {
+                                        const {field, form, meta} = props
+                                        return (
+                                            <div>
+                                                <CustomInput id="name" type="text" placeholder="Customer Name" ref={nmInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{errors.name}</div> : null}
+                                            </div>
+                                        )
+                                    }}
+                                </Field>
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
-                                <Field className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
-                                    id="phone"
-                                    name="phone"
-                                    type="number"
-                                    placeholder="Customer Phone"
-                                    ref={phInpEl}
-                                />
-                                <ErrorMessage name='phone' component={simpledivErrMsg} />
+                                <Field name="name" >
+                                    { props => {
+                                        const {field, form, meta} = props
+                                        return (
+                                            <div>
+                                                <CustomInput id="name" type="text" placeholder="Customer Name" ref={nmInpEl} {...field} meta={meta}/>
+                                                {meta.error && meta.touched ? <div className={styles.errors}>{errors.name}</div> : null}
+                                            </div>
+                                        )
+                                    }}
+                                </Field>
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
@@ -152,7 +151,7 @@ function form() {
                                     ref={addrInpEl}
                                     maxLength={10}
                                 />
-                                <ErrorMessage name='address' component={simpledivErrMsg} />
+                                <ErrorMessage name='address' component={SimpledivErrMsg} />
                             </div>
                             <div className={styles["form-control"]} >
                                 <div className={styles.labelColumn}>
@@ -179,7 +178,7 @@ function form() {
                                     placeholder="Total Amount"
                                     ref={amtInpEl}
                                 />
-                                <ErrorMessage name='amount' component={simpledivErrMsg} />
+                                <ErrorMessage name='amount' component={SimpledivErrMsg} />
                             </div>
                             <div className={`${styles.buttonContainer} ${styles["form-control"]}`} >
                                 <button type="submit" className={`${styles.button}`}
@@ -194,4 +193,4 @@ function form() {
     )
 }
 
-export default form
+export default field_children
