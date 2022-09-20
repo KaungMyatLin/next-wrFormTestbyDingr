@@ -23,8 +23,6 @@ function field_children() {
                 .max(20, "Your name length must be max ${max} characters or less")
                 .required("Required"),
             phone: Yup.number()
-                .truncate()
-                .positive("Your phone number must be positive")
                 .integer("Your phone number must be integer")
                 .required("Required"),
             email: Yup.string().trim()
@@ -34,7 +32,6 @@ function field_children() {
                 .min(10, "Your address length must be min ${min} characters or more"),
             remark: Yup.string().trim(),
             amount: Yup.number()
-                .positive("Entered total amount must be positive")
                 .integer("Entered total amount must be integer")
                 .min(199, "Entered total amount must be more than ${min} in value")
                 .required("Required"),

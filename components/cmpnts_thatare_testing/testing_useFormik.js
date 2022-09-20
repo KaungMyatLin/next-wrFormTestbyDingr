@@ -23,7 +23,6 @@ function form() {
                 .max(20, "Your name length must be max ${max} characters or less")
                 .required("Required"),
             phone: Yup.number()
-                .positive("Your phone number must be positive")
                 .integer("Your phone number must be integer")
                 .moreThan(9, "Your phone number must be max ${more} digits or less")
                 .required("Required"),
@@ -31,7 +30,6 @@ function form() {
                 .email("Your email must be valid email addresss`")
                 .required("Required"),
             amount: Yup.number()
-                .positive("Entered total amount must be positive")
                 .integer("Entered total amount must be integer")
                 .min(199, "Entered total amount must be more than ${min} in value")
                 .required("Required"),
