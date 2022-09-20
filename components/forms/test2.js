@@ -94,7 +94,7 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="name">Customer Name</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
+                                <Field className={`${styles.inputColumn} ${errors.name && touched.name? styles.inptouched: null}`}
                                     id="name"
                                     name="name"
                                     type="text"
@@ -102,7 +102,7 @@ function form() {
                                     // onBlur={formik.handleBlur}
                                     // value={formik.values.name}
                                     // above or below
-                                    { ... formik.getFieldProps('name')}
+                                    // { ... formik.getFieldProps('name')}
                                     placeholder="Customer Name"
                                     ref={nmInpEl}
                                 />
@@ -115,11 +115,10 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="phone">Customer Phone</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
+                                <Field className={`${styles.inputColumn} ${errors.phone && touched.phone? styles.inptouched: null}`}
                                     id="phone"
                                     name="phone"
                                     type="number"
-                                    { ... formik.getFieldProps('phone')}
                                     placeholder="Customer Phone"
                                     ref={phInpEl}
                                 />
@@ -130,11 +129,10 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="email">Email</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
+                                <Field className={`${styles.inputColumn} ${errors.email && touched.email? styles.inptouched: null}`}
                                     id ="email"
                                     name="email"
                                     type="email"
-                                    { ... formik.getFieldProps('email')}
                                     placeholder="Email"
                                     ref={emInpEl}
                                 />
@@ -146,11 +144,10 @@ function form() {
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="address">Customer Address</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.address && touched.address? styles.inptouched: null}`}
+                                <Field className={`${styles.inputColumn} ${errors.address && touched.address? styles.inptouched: null}`}
                                     id="address"
                                     name="address"
                                     type="text"
-                                    { ... formik.getFieldProps('address')}
                                     placeholder="Customer Address"
                                     ref={addrInpEl}
                                     maxLength={10}
@@ -161,11 +158,10 @@ function form() {
                                 <div className={styles.labelColumn}>
                                     <label htmlFor="remark">Description</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
+                                <Field className={`${styles.inputColumn} ${errors.remark && touched.remark? styles.inptouched: null}`}
                                     id="remark"
                                     name="remark"
                                     type="text"
-                                    { ... formik.getFieldProps('remark')}
                                     placeholder="Description"
                                     ref={rmrkInpEl}
                                 />
@@ -176,11 +172,10 @@ function form() {
                                     <span style={{color: "red !important", display: "inline", float: "none"}}>*</span>
                                     <label htmlFor="amount">Total Amount</label>
                                 </div>
-                                <input className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
+                                <Field className={`${styles.inputColumn} ${errors.amount && touched.amount? styles.inptouched: null}`}
                                     id="amount"
                                     name="amount"
                                     type="number"
-                                    { ... formik.getFieldProps('amount')}
                                     placeholder="Total Amount"
                                     ref={amtInpEl}
                                 />
